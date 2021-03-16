@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://jakarta.ee/xml/ns/jakartaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/nx/jakartaee   
+						https://jakarta.ee/xml/nx/jakartaee/web-app_5_0.xsd" version="5.0" metadata-complete="true">
+
+
+    <context-param>
+        <param-name>Country</param-name>
+        <param-value>Egypt</param-value>
+    </context-param>
+
+    <context-param>
+
+        <param-name>City</param-name>
+        <param-value>Cairo</param-value>
+
+    </context-param>
+
+
+    <servlet>
+        <servlet-name>MyExcelServlet</servlet-name>
+        <servlet-class>com.playground.MyExcelServlet</servlet-class>
+
+    </servlet>
+
+    <servlet>
+        <servlet-name>MyWordServlet</servlet-name>
+        <servlet-class>com.playground.MyWordServlet</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>MyExcelServlet</servlet-name>
+        <url-pattern>/excel</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MyWordServlet</servlet-name>
+        <url-pattern>/word</url-pattern>
+    </servlet-mapping>
+
+
+    <session-config>
+        <session-timeout>
+          30
+        </session-timeout>
+    </session-config>
+
+
+</web-app>
