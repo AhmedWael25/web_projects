@@ -1,6 +1,0 @@
-com\playground\model\Message.class
-com\playground\ChatServlet.class
-com\playground\model\User.class
-com\playground\OnlineUsersEndPoint.class
-com\playground\SessionService.class
-com\playground\ChatServer.class
