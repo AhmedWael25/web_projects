@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="org.playground.domain.Account" table="account">
+
+        <id name="id" column="id" type="int">
+            <generator class="identity"/>
+        </id>
+
+        <property name="address" column="address" type="string"/>
+
+        <property name="userName" column="user_name" type="string"/>
+
+        <property name="birthday" column="birthday" type="date"/>
+
+        <property name="fullName" column="full_name" type="string"/>
+
+        <property name="phone" column="phone" type="string"/>
+
+        <property name="password" column="password" type="string"/>
+
+
+
+    </class>
+</hibernate-mapping>
+

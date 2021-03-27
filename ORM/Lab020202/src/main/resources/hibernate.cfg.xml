@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/biddingschema</property>
+        <property name="hibernate.connection.username">admin</property>
+        <property name="hibernate.connection.password">admin</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+
+
+        <property name="show_sql">true</property>
+        <property name="current_session_context_class">thread</property>
+
+        <mapping resource="generated/BuyerBuyProduct.hbm.xml"/>
+        <mapping resource="generated/Buyer.hbm.xml"/>
+        <mapping resource="generated/BuyerBidProduct.hbm.xml"/>
+        <mapping resource="generated/User.hbm.xml"/>
+        <mapping resource="generated/Seller.hbm.xml"/>
+        <mapping resource="generated/Category.hbm.xml"/>
+        <mapping resource="generated/Product.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>

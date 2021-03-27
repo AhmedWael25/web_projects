@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.playground.inheritance3.Person" table="person" schema="inheritance3" discriminator-value="person" >
+        <id name="id" column="id">
+            <generator class="increment"/>
+
+        </id>
+        <discriminator column="person_type" type="string"/>
+        <property name="firstName" column="first_name"/>
+        <property name="lastName" column="last_name"/>
+
+
+
+    </class>
+
+
+    <subclass name="org.playground.inheritance3.Student" extends="org.playground.inheritance3.Person"
+              discriminator-value="student">
+
+        <property name="department" column="department" type="string"/>
+
+    </subclass>
+
+
+    <subclass name="org.playground.inheritance3.Teacher" extends="org.playground.inheritance3.Person"
+              discriminator-value="teacher">
+
+        <property name="hireDate" column="hire_date" type="date"/>
+
+    </subclass>
+
+
+</hibernate-mapping>

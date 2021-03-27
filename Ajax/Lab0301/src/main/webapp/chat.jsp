@@ -34,9 +34,13 @@
         var userJson = JSON.stringify(myUser);
 
         //Send The user data to the servlet
-        $.post("chat","user="+userJson,function (resp){
-           console.log("ERRasaas");
-        });
+        // $.post("chat","user="+userJson,function (resp){
+        //    console.log("ERRasaas");
+        // });
+
+
+        var w;
+        startworker(w,userJson);
 
 
 
@@ -60,8 +64,6 @@
         }else{
             console.log("ERR");
         }
-        var w;
-        startworker(w);
 
     }
 
@@ -83,10 +85,13 @@
         window.location.href = "http://localhost:9191/ajaxchatroom";
     }
 
-    function startworker(w){
+    function startworker(w,userJson){
         if (typeof(Worker) !== "undefined") {
             if (typeof(w) == "undefined") {
                 w = new Worker("worker.js");
+                w.postMessage({
+                    user:userJson
+            });
             }
             w.onmessage = function(event) {
                 console.log(event.data);

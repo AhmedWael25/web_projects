@@ -8,4 +8,23 @@ function sum() {
     postMessage(sum);
 }
 
+
+
+function userPost(userJson){
+
+    postMessage("from worker: "+userJson);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "chat", true);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+
+    xhr.send("user="+userJson);
+}
+
+
+self.addEventListener("message", function(e) {
+    var jsonUser = e.data.user
+    userPost(jsonUser);
+});
+
 sum();

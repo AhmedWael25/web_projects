@@ -1,0 +1,128 @@
+# GET  EMPLOYEE BY ID REQUEST
+POST http://localhost:9191/SOAP-D1/ws/employee HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns="http://interfaces.dao.playground.org/">
+    
+    <soap:Body>
+        <ns:getEmployeeById>
+            <arg0>8</arg0>
+        </ns:getEmployeeById>
+    </soap:Body>
+
+</soap:Envelope>
+
+###
+# CREATE NEW EMPLOYEE REQUEST
+POST http://localhost:9191/SOAP-D1/ws/employee HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns="http://interfaces.dao.playground.org/">
+    
+    <soap:Body>
+        <ns:saveEmployee >
+            <arg0>
+                <firstName>MyCreated</firstName>
+                <lastName>MyCreated</lastName>
+                <ssn>034298123697346</ssn>
+            </arg0>
+        </ns:saveEmployee>
+    </soap:Body>
+
+</soap:Envelope>
+
+###
+
+#   UPDATE EMPLOYEE REQUEST
+POST http://localhost:9191/SOAP-D1/ws/employee HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns="http://interfaces.dao.playground.org/">
+    
+    <soap:Body>
+        <ns:updateEmployee >
+            <arg0>
+                <id>8</id> 
+                <firstName>updated</firstName>
+                <lastName>UPDATED</lastName>
+                <ssn>034298123697346</ssn>
+            </arg0>
+        </ns:updateEmployee>
+    </soap:Body>
+
+</soap:Envelope>
+
+### 
+
+POST http://localhost:9191/SOAP-D1/ws/employee HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns="http://interfaces.dao.playground.org/">
+    
+    <soap:Body>
+        <ns:deleteEmployeeById >
+            <arg0>6</arg0>
+        </ns:deleteEmployeeById>
+    </soap:Body>
+
+</soap:Envelope>
+
+
+# ###
+# # ERROR -> what is even "jets" prefix mean !?
+# POST http://localhost:9595/SOAP-D1/ws/calculator HTTP/1.1
+# Content-Type: text/xml
+
+# <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    
+#     <soap:Body>
+#         <jets:add>
+#             <arg0>33</arg0>
+#             <arg1>33</arg1>
+#         </jets:add>
+#     </soap:Body>
+
+# </soap:Envelope>
+
+# ###
+# # ERROR -> No way to find out where is this add method
+# POST http://localhost:9595/SOAP-D1/ws/calculator HTTP/1.1
+# Content-Type: text/xml
+
+# <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    
+#     <soap:Body>
+#         <add>
+#             <arg0>33</arg0>
+#             <arg1>33</arg1>
+#         </add>
+#     </soap:Body>
+
+# </soap:Envelope>
+
+
+
+
+
+# ###
+# # SOAP Fault - Division by zero (Runtime Exception)
+# POST http://localhost:9595/SOAP-D1/ws/calculator HTTP/1.1
+# Content-Type: text/xml
+
+# <soap:Envelope
+#     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+#     xmlns:jets="http://jets.iti.gov.eg/">
+    
+#     <soap:Body>
+#         <jets:div>
+#             <arg0>12</arg0>
+#             <arg1>0</arg1>
+#         </jets:div>
+#     </soap:Body>
+
+# </soap:Envelope>

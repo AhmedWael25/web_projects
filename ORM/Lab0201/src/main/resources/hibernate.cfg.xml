@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!--        Assign the Driver Class-->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <!--        Assign the Connection URL-->
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/biddingschema</property>
+        <!--        Assign DB Login Creds.-->
+        <property name="hibernate.connection.username">admin</property>
+        <property name="hibernate.connection.password">admin</property>
+        <!--        Assign the Dialect , so that hibernate could generate the appropriate sql statements-->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+
+<!--        <mapping class="org.playground.domain.Buyer"/>-->
+<!--        <mapping class="org.playground.domain.BuyerBidProduct"/>-->
+<!--        <mapping class="org.playground.domain.BuyerBidProductId"/>-->
+<!--        <mapping class="org.playground.domain.BuyerBuyProduct"/>-->
+<!--        <mapping class="org.playground.domain.BuyerBuyProductId"/>-->
+<!--        <mapping class="org.playground.domain.Category"/>-->
+<!--        <mapping class="org.playground.domain.Product"/>-->
+<!--        <mapping class="org.playground.domain.Seller"/>-->
+<!--        <mapping class="org.playground.domain.User"/>-->
+
+
+        <mapping resource="Buyer.hbm.xml"/>
+        <mapping resource="BuyerBidProduct.hbm.xml"/>
+        <mapping resource="BuyerBuyProduct.hbm.xml"/>
+        <mapping resource="Category.hbm.xml"/>
+        <mapping resource="Product.hbm.xml"/>
+        <mapping resource="ProductHasCategory.hbm.xml"/>
+        <mapping resource="Seller.hbm.xml"/>
+        <mapping resource="User.hbm.xml"/>
+
+
+    </session-factory>
+</hibernate-configuration>

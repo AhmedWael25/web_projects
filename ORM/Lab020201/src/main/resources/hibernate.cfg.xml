@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/biddingschema</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.username">admin</property>
+        <property name="hibernate.connection.password">admin</property>
+
+        <property name="show_sql">true</property>
+        <property name="current_session_context_class">thread</property>
+
+<!--        <mapping resource="Buyer.hbm.xml"/>-->
+<!--        <mapping resource="BuyerBidProduct.hbm.xml"/>-->
+<!--        <mapping resource="BuyerBuyProduct.hbm.xml"/>-->
+<!--        <mapping resource="Cart.hbm.xml"/>-->
+<!--        <mapping resource="Category.hbm.xml"/>-->
+<!--        <mapping resource="Customer.hbm.xml"/>-->
+<!--        <mapping resource="Items.hbm.xml"/>-->
+<!--        <mapping resource="Order.hbm.xml"/>-->
+<!--        <mapping resource="Product.hbm.xml"/>-->
+<!--        <mapping resource="ProductHasCategory.hbm.xml"/>-->
+<!--        <mapping resource="Seller.hbm.xml"/>-->
+<!--        <mapping resource="User.hbm.xml"/>-->
+
+        <mapping class="com.playground.generated.Product"/>
+        <mapping class="com.playground.generated.ProductHasCategory"/>
+        <mapping class="com.playground.generated.User"/>
+        <mapping class="com.playground.generated.Seller"/>
+        <mapping class="com.playground.generated.BuyerBuyProduct"/>
+        <mapping class="com.playground.generated.Buyer"/>
+        <mapping class="com.playground.generated.BuyerBidProduct"/>
+        <mapping class="com.playground.generated.Category"/>
+
+
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<ehcache>
+    <cache name="org.playground.inheritance1.Person" maxElementsInMemory="50" />
+</ehcache>

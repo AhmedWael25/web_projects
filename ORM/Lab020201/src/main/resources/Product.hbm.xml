@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.playground.generated.Product" table="product" schema="biddingschema">
+        <id name="id" column="id"/>
+        <property name="name" column="name"/>
+        <property name="description" column="description"/>
+        <property name="manufacturingName" column="manufacturing_name"/>
+        <property name="manufacturingDate" column="manufacturing_date"/>
+        <property name="expirationDate" column="expiration_date"/>
+        <property name="sellerId" column="seller_id"/>
+        <property name="quantity" column="quantity"/>
+        <property name="offeredDate" column="offered_date"/>
+        <property name="finishDate" column="finish_date"/>
+        <many-to-one name="sellerBySellerId" class="com.playground.generated.Seller">
+            <column name="seller_id" not-null="true"/>
+        </many-to-one>
+        <set name="buyerBidProductsById" inverse="true">
+            <key>
+                <column name="product_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.playground.generated.BuyerBidProduct"/>
+        </set>
+        <set name="buyerBuyProductsById" inverse="true">
+            <key>
+                <column name="product_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.playground.generated.BuyerBuyProduct"/>
+        </set>
+        <set name="productHasCategoriesById" inverse="true">
+            <key>
+                <column name="product_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.playground.generated.ProductHasCategory"/>
+        </set>
+    </class>
+</hibernate-mapping>

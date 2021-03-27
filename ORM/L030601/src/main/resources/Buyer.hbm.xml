@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.playground.generatedEntities.Buyer" table="buyer" schema="biddingschema">
+        <id name="id" column="id"/>
+        <property name="value" column="value"/>
+        <property name="userId" column="user_id"/>
+        <many-to-one name="userByUserId" class="org.playground.generatedEntities.User">
+            <column name="user_id"/>
+        </many-to-one>
+        <set name="buyerBidProductsById" inverse="true">
+            <key>
+                <column name="buyer_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.playground.generatedEntities.BuyerBidProduct"/>
+        </set>
+        <set name="buyerBuyProductsById" inverse="true">
+            <key>
+                <column name="buyer_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.playground.generatedEntities.BuyerBuyProduct"/>
+        </set>
+    </class>
+</hibernate-mapping>
