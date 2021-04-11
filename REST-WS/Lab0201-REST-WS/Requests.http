@@ -1,0 +1,95 @@
+# GET  All Emps Avail.
+#Accept JSON
+GET http://localhost:9191/REST-D2/api/emps HTTP/1.1
+Accept: application/json
+
+###################################
+
+# GET  All Emps Avail.
+#Accept XML
+GET http://localhost:9191/REST-D2/api/emps HTTP/1.1
+Accept: application/xml
+
+###################################
+
+# GET Emp By Id
+#Accept XML
+GET http://localhost:9191/REST-D2/api/emps/4 HTTP/1.1
+Accept: application/xml
+
+##################################
+
+# GET Emp By Id
+#Accept JSON
+GET http://localhost:9191/REST-D2/api/emps/34 HTTP/1.1
+Accept: application/json
+
+##################################
+
+# SAVE NEW EMPLOYEEE
+# Send JSON ACCEPT XML
+POST http://localhost:9191/REST-D2/api/emps HTTP/1.1
+Accept: application/xml
+Content-Type: application/json
+
+{
+    "firstName": "JJSON CREATED",
+    "lastName" : "JSON CREATED",
+    "ssn": "609124452"
+}
+
+#################################
+# SAVE NEW EMPLOYEEE
+# Send XML ACCEPT JSON
+POST http://localhost:9191/REST-D2/api/emps HTTP/1.1
+Accept: application/json
+Content-Type: application/xml
+
+<employee>
+    <firstName>XML CREATED</firstName>
+    <lastName>XML CREATED</lastName>
+    <ssn>23642754234</ssn>
+</employee>
+
+################################
+# UPDATE EMP EMPLOYEEE
+# Send JSON ACCEPT JSON
+PUT http://localhost:9191/REST-D2/api/emps HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "id" : "2735",
+    "firstName": " UPDATED",
+    "lastName" : " UPDATED",
+    "ssn": "609124452"
+}
+
+###############################
+# UPDATE EMP EMPLOYEEE
+# Send XML ACCEPT XML
+PUT http://localhost:9191/REST-D2/api/emps HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+
+<employee>
+    <id>5500</id>
+    <firstName>XML UPDATED</firstName>
+    <lastName>XML UPDATED</lastName>
+    <ssn>236424666665234</ssn>
+</employee>
+
+##############################
+#Del EMP By Id
+DELETE http://localhost:9191/REST-D2/api/emps/109 HTTP/1.1
+
+#############################
+
+# PAGINATE EMPS.
+#Accept XML
+GET http://localhost:9191/REST-D2/api/emps/paging?offset=2 HTTP/1.1
+Accept: application/xml
+
+#############################
+
+

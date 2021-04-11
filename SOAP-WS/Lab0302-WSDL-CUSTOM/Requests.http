@@ -1,0 +1,93 @@
+# GET  EMPLOYEE BY ID REQUEST
+POST http://localhost:9191/SOAP-D302-WSDL-CUSTOM/ws/calc HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns="MyCustom.Name.Space.xxx">
+    
+    <soap:Body>
+        <ns:myAddMethod>
+            <myParam>4</myParam>
+            <arg1>10</arg1>
+        </ns:myAddMethod>
+    </soap:Body>
+
+</soap:Envelope>
+
+###################################
+# DOCUMENT - LITERAL - BARE
+
+#POST http://localhost:9191/SOAP-D301/ws/calc HTTP/1.1
+# Content-Type: text/xml
+
+# <soap:Envelope
+#     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+#     xmlns:ns="http://interfaces.dao.playground.org/">
+    
+#     <soap:Body>
+#         <ns:add>
+#             <param1>4</param1>
+#             <param2>10</param2>
+#         </ns:add>
+#     </soap:Body>
+
+# </soap:Envelope>
+
+###################################
+
+
+
+# ###
+# # ERROR -> what is even "jets" prefix mean !?
+# POST http://localhost:9595/SOAP-D1/ws/calculator HTTP/1.1
+# Content-Type: text/xml
+
+# <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    
+#     <soap:Body>
+#         <jets:add>
+#             <arg0>33</arg0>
+#             <arg1>33</arg1>
+#         </jets:add>
+#     </soap:Body>
+
+# </soap:Envelope>
+
+# ###
+# # ERROR -> No way to find out where is this add method
+# POST http://localhost:9595/SOAP-D1/ws/calculator HTTP/1.1
+# Content-Type: text/xml
+
+# <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    
+#     <soap:Body>
+#         <add>
+#             <arg0>33</arg0>
+#             <arg1>33</arg1>
+#         </add>
+#     </soap:Body>
+
+# </soap:Envelope>
+
+
+
+
+
+# ###
+# # SOAP Fault - Division by zero (Runtime Exception)
+# POST http://localhost:9595/SOAP-D1/ws/calculator HTTP/1.1
+# Content-Type: text/xml
+
+# <soap:Envelope
+#     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+#     xmlns:jets="http://jets.iti.gov.eg/">
+    
+#     <soap:Body>
+#         <jets:div>
+#             <arg0>12</arg0>
+#             <arg1>0</arg1>
+#         </jets:div>
+#     </soap:Body>
+
+# </soap:Envelope>

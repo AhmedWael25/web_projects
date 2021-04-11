@@ -1,0 +1,103 @@
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://impl.dao.playground.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://impl.dao.playground.org/" name="CalculatorOpsImplService">
+
+<!-- =======TYPES IS EMPTY ======== -->
+    <types />
+
+<!-- == NO SCHEMA VALIDATION
+        message defines name and type attributes of part
+        soap:body has the Namespace
+        -->
+    <message name="add">
+        <part name="arg0" type="xsd:double" />
+        <part name="arg1" type="xsd:double" />
+    </message>
+    <message name="addResponse">
+        <part name="return" type="xsd:double" />
+    </message>
+    <message name="mul">
+        <part name="arg0" type="xsd:double" />
+        <part name="arg1" type="xsd:double" />
+    </message>
+    <message name="mulResponse">
+        <part name="return" type="xsd:double" />
+    </message>
+    <message name="sub">
+        <part name="arg0" type="xsd:double" />
+        <part name="arg1" type="xsd:double" />
+    </message>
+    <message name="subResponse">
+        <part name="return" type="xsd:double" />
+    </message>
+    <message name="div">
+        <part name="arg0" type="xsd:double" />
+        <part name="arg1" type="xsd:double" />
+    </message>
+    <message name="divResponse">
+        <part name="return" type="xsd:double" />
+    </message>
+    <portType name="CalculatorOps">
+        <operation name="add" parameterOrder="arg0 arg1">
+            <input xmlns:ns1="http://www.w3.org/2007/05/addressing/metadata" ns1:Action="http://interfaces.dao.playground.org/CalculatorOps/addRequest" message="tns:add" />
+            <output xmlns:ns2="http://www.w3.org/2007/05/addressing/metadata" ns2:Action="http://interfaces.dao.playground.org/CalculatorOps/addResponse" message="tns:addResponse" />
+        </operation>
+        <operation name="mul" parameterOrder="arg0 arg1">
+            <input xmlns:ns3="http://www.w3.org/2007/05/addressing/metadata" ns3:Action="http://interfaces.dao.playground.org/CalculatorOps/mulRequest" message="tns:mul" />
+            <output xmlns:ns4="http://www.w3.org/2007/05/addressing/metadata" ns4:Action="http://interfaces.dao.playground.org/CalculatorOps/mulResponse" message="tns:mulResponse" />
+        </operation>
+        <operation name="sub" parameterOrder="arg0 arg1">
+            <input xmlns:ns5="http://www.w3.org/2007/05/addressing/metadata" ns5:Action="http://interfaces.dao.playground.org/CalculatorOps/subRequest" message="tns:sub" />
+            <output xmlns:ns6="http://www.w3.org/2007/05/addressing/metadata" ns6:Action="http://interfaces.dao.playground.org/CalculatorOps/subResponse" message="tns:subResponse" />
+        </operation>
+        <operation name="div" parameterOrder="arg0 arg1">
+            <input xmlns:ns7="http://www.w3.org/2007/05/addressing/metadata" ns7:Action="http://interfaces.dao.playground.org/CalculatorOps/divRequest" message="tns:div" />
+            <output xmlns:ns8="http://www.w3.org/2007/05/addressing/metadata" ns8:Action="http://interfaces.dao.playground.org/CalculatorOps/divResponse" message="tns:divResponse" />
+        </operation>
+    </portType>
+
+
+    <binding xmlns:ns1="http://interfaces.dao.playground.org/" name="CalculatorOpsImplPortBinding" type="ns1:CalculatorOps">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+        <operation name="add">
+            <soap:operation soapAction="" />
+            <input>
+                <!-- NS IN SoapBody -->
+                <soap:body use="literal" namespace="http://interfaces.dao.playground.org/" />
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://interfaces.dao.playground.org/" />
+            </output>
+        </operation>
+        <operation name="mul">
+            <soap:operation soapAction="" />
+            <input>
+                <soap:body use="literal" namespace="http://interfaces.dao.playground.org/" />
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://interfaces.dao.playground.org/" />
+            </output>
+        </operation>
+        <operation name="sub">
+            <soap:operation soapAction="" />
+            <input>
+                <soap:body use="literal" namespace="http://interfaces.dao.playground.org/" />
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://interfaces.dao.playground.org/" />
+            </output>
+        </operation>
+        <operation name="div">
+            <soap:operation soapAction="" />
+            <input>
+                <soap:body use="literal" namespace="http://interfaces.dao.playground.org/" />
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://interfaces.dao.playground.org/" />
+            </output>
+        </operation>
+    </binding>
+    <service name="CalculatorOpsImplService">
+        <port name="CalculatorOpsImplPort" binding="tns:CalculatorOpsImplPortBinding">
+            <soap:address location="http://localhost:9191/SOAP-D301/ws/calc" />
+        </port>
+    </service>
+</definitions>

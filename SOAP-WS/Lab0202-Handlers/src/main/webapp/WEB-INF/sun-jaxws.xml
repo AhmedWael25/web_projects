@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+
+    <endpoint name="EmployeeImpl" implementation="org.playground.dao.impl.EmployeeImpl" url-pattern="/ws/employee">
+
+        <handler-chains xmlns="https://jakarta.ee/xml/ns/jakartaee">
+
+            <handler-chain>
+
+                <handler>
+                    <handler-class>org.playground.handlers.MyLogicalHandler</handler-class>
+                </handler>
+                <handler>
+                    <handler-class>org.playground.handlers.MySoapProtocolHandler</handler-class>
+                </handler>
+
+            </handler-chain>
+        </handler-chains>
+    </endpoint>
+
+</endpoints>

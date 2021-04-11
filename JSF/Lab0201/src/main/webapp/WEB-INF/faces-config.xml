@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="3.0" xmlns="https://jakarta.ee/xml/ns/jakartaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+    https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd">
+
+
+    <managed-bean>
+        <managed-bean-name>user</managed-bean-name>
+        <managed-bean-class>com.playground.beans.LoginBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>voteBean</managed-bean-name>
+        <managed-bean-class>com.playground.beans.VoteBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>catListBean</property-name>
+            <property-class>com.playground.beans.CatListBean</property-class>
+            <value>#{listBean}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>listBean</managed-bean-name>
+        <managed-bean-class>com.playground.beans.CatListBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+
+    </managed-bean>
+    
+    
+    <navigation-rule>
+        <from-view-id>/home.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/welcome.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+            <redirect>
+                <redirect-param>
+                    <name>err</name>
+                    <value>1</value>
+                </redirect-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+
+
+</faces-config>

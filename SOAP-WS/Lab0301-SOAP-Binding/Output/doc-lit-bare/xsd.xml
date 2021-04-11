@@ -1,0 +1,12 @@
+<xs:schema xmlns:tns="http://interfaces.dao.playground.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://interfaces.dao.playground.org/">
+    <xs:element name="add" nillable="true" type="tns:calcParams" />
+    <xs:element name="addResponse" type="xs:double" />
+    <xs:complexType name="calcParams">
+        <xs:sequence>
+            
+            <xs:element name="param1" type="xs:double" />
+            <xs:element name="param2" type="xs:double" />
+            
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

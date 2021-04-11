@@ -1,0 +1,55 @@
+<!--  Published by JAX-WS RI (https://github.com/eclipse-ee4j/metro-jax-ws). RI's version is JAX-WS RI 3.0.0 git-revision#af8101a.  -->
+<xs:schema xmlns:tns="http://interfaces.dao.playground.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://interfaces.dao.playground.org/">
+    <xs:element name="add" type="tns:add" />
+    <xs:element name="addResponse" type="tns:addResponse" />
+    <xs:element name="div" type="tns:div" />
+    <xs:element name="divResponse" type="tns:divResponse" />
+    <xs:element name="mul" type="tns:mul" />
+    <xs:element name="mulResponse" type="tns:mulResponse" />
+    <xs:element name="sub" type="tns:sub" />
+    <xs:element name="subResponse" type="tns:subResponse" />
+    <xs:complexType name="add">
+        <xs:sequence>
+            <xs:element name="arg0" type="xs:double" />
+            <xs:element name="arg1" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="addResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="div">
+        <xs:sequence>
+            <xs:element name="arg0" type="xs:double" />
+            <xs:element name="arg1" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="divResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="sub">
+        <xs:sequence>
+            <xs:element name="arg0" type="xs:double" />
+            <xs:element name="arg1" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="subResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="mul">
+        <xs:sequence>
+            <xs:element name="arg0" type="xs:double" />
+            <xs:element name="arg1" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="mulResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

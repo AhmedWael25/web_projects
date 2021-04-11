@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence version="2.2"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+    <persistence-unit name="webservice_JPA" transaction-type="RESOURCE_LOCAL">
+        <description>My Unit for WebService Examples</description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- JTA and NON-JTA are mostly used in jakarta EE env.
+        To enable referencing of JNDI Names of datasources -->
+        <non-jta-data-source>java:/comp/env/jdbc/webservicedb</non-jta-data-source>
+        <!-- <jta-data-source>java:app/jdbc/MyDataSource</jta-data-source> -->
+
+<!-- ===================2nd LVL CACHE======================= -->
+        <!-- Cache All Entities -->
+        <!-- <shared-cache-mode>ALL</shared-cache-mode> -->
+        <!--Cache Entities not with @Cacheble  -->
+        <!-- <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode> -->
+        <!-- Cache only entites with @Cacheable annotation -->
+        <!-- <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode> -->
+        <!-- Cache None also it's the default -->
+        <!-- <shared-cache-mode>NONE</shared-cache-mode> -->
+        <!-- <shared-cache-mode>UNSPECIFIED</shared-cache-mode> -->
+<!-- ========================================== -->
+
+
+        <!-- By Default JPA persistent unit find all
+        managed annotated classes in the root...
+    By Example removing Employy Mapping wont cause problems -->
+    <class> org.playground.domain.Publisher</class>
+    <class> org.playground.domain.Book</class>
+    <class> org.playground.domain.Author</class>
+    <class> org.playground.domain.Employee</class>
+
+    <!-- ===TO exclude classes which are added by default  -->
+    <!-- <exclude-unlisted-classes>true</exclude-unlisted-classes> -->
+
+    <!-- JPA integrates with the bean validation specification
+    to automatically validate value of entities before they get persisted
+    or their value updated  -->
+    <!-- AUTO=perform validation if an IMPLEMENTATION is available[Default] -->
+    <!-- CALLBACK= perform validation only if an impl is available and
+    will throw exception if impl is not provided -->
+    <!-- None=wont perform any Validation  -->
+        <validation-mode>CALLBACK</validation-mode>
+
+        <properties>
+
+            <!-- Wont need those in Jakarta EE Env, We already setup the NON-JTA
+            above -->
+            <!-- <property name ="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/webservicedb"/> -->
+            <!-- <property name ="javax.persistence.jdbc.user" value="root"/> -->
+            <!-- <property name ="javax.persistence.jdbc.password" value="admin"/> -->
+            <!-- <property name ="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/> -->
+
+
+
+            <property name ="javax.persistence.schema-generation.database.action" value="update"/>
+
+        </properties>
+
+    </persistence-unit>
+</persistence>

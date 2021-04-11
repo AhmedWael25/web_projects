@@ -1,0 +1,39 @@
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://impl.dao.playground.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://impl.dao.playground.org/" name="CalculatorOpsImplService">
+
+
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://interfaces.dao.playground.org/" schemaLocation="http://localhost:9191/SOAP-D301/ws/calc?xsd=1" />
+        </xsd:schema>
+    </types>
+    <message name="add">
+        <part name="add" element="tns:add" />
+    </message>
+    <message name="addResponse">
+        <part name="addResponse" element="tns:addResponse" />
+    </message>
+    <portType name="CalculatorOps">
+        <operation name="add">
+            <input xmlns:ns1="http://www.w3.org/2007/05/addressing/metadata" ns1:Action="http://interfaces.dao.playground.org/CalculatorOps/addRequest" message="tns:add" />
+            <output xmlns:ns2="http://www.w3.org/2007/05/addressing/metadata" ns2:Action="http://interfaces.dao.playground.org/CalculatorOps/addResponse" message="tns:addResponse" />
+        </operation>
+    </portType>
+
+    <binding xmlns:ns1="http://interfaces.dao.playground.org/" name="CalculatorOpsImplPortBinding" type="ns1:CalculatorOps">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <operation name="add">
+            <soap:operation soapAction="" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+    </binding>
+    <service name="CalculatorOpsImplService">
+        <port name="CalculatorOpsImplPort" binding="tns:CalculatorOpsImplPortBinding">
+            <soap:address location="http://localhost:9191/SOAP-D301/ws/calc" />
+        </port>
+    </service>
+</definitions>
