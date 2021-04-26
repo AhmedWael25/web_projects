@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Despite the constructor being Prod,User it didnot throw an exception !!! -->
+    <bean name="simpleService2Bean1" class="com.playground.test2.service2.Service2Impl">
+        <constructor-arg ref="userDao1"/>
+        <constructor-arg ref="productDao1"/>
+    </bean>
+    <!-- This uses the same usaerdao ana product as above, bec we are using same id -->
+    <bean name="simpleService2Bean2" class="com.playground.test2.service2.Service2Impl">
+        <constructor-arg type="com.playground.test2.daos.userdao.UserDaoInt"  ref="userDao1"/>
+        <constructor-arg type="com.playground.test2.daos.productdao.ProductDaoInt" ref="productDao1"/>
+    </bean>
+    <!-- aNONYMOUS class -->
+    <bean name="simpleService2Bean3" class="com.playground.test2.service2.Service2Impl">
+        <constructor-arg>
+            <bean class="com.playground.test2.daos.userdao.UserDaoImpl"/>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.playground.test2.daos.productdao.ProductDaoImpl"/>
+        </constructor-arg>
+    </bean>
+
+    <!-- ===FACTORY METHOD BASED INJECTION === -->
+    <bean name="serviceLocator" class="com.playground.test2.ServiceLocator"/>
+    <bean name="simpleService2Bean4" factory-bean="serviceLocator"
+    factory-method="createService2Instance">
+        <constructor-arg  ref="userDao1"/>
+        <constructor-arg  ref="productDao1"/>
+    </bean>
+    <!--  -->
+
+    <!--  ===SETTER BASED INJECTION ===-->
+
+    <bean name="simpleService2Bean5" class="com.playground.test2.service2.Service2Impl"
+    >
+        <property name="userDao" ref="userDao1"></property>
+        <property name="productDao" ref="productDao1"></property>
+    </bean>
+
+    <!-- ======================Collections Testing ============================= -->
+
+    <!-- The default is arrray list, if type of lst obj. is not specified  -->
+    <bean name="collectionTestingBean1" class="com.playground.test2.service2.CollectionsTesting">
+        <constructor-arg >
+            <list>
+                <value>helllo</value>
+                <value>helllo2</value> 
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- Default is the Linked Hash Map -->
+    <bean name="collectionTestingBean2" class="com.playground.test2.service2.CollectionsTesting">
+        <constructor-arg >
+            <map>
+                <entry key="key1" value="Value1"/>
+                <entry key="key2" value="Value2"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    <!-- Linked Hash Set is the default DS  -->
+    <bean name="collectionTestingBean3" class="com.playground.test2.service2.CollectionsTesting">
+        <constructor-arg >
+            <set>
+                <value>Hello</value>
+                <value>Hello</value>
+                <value>Hell2</value>
+                <value>Hello</value>
+            </set>
+        </constructor-arg>
+    </bean>
+
+    <bean name="collectionTestingBean4" class="com.playground.test2.service2.CollectionsTesting">
+        <constructor-arg >
+            <props>
+                <prop key="JDBC">Noice</prop>
+                <prop key="JDBC2">Noice2</prop>
+                <prop key="JDBC3"></prop>
+            </props>
+        </constructor-arg>
+    </bean>
+
+
+    <!-- Compound Property test, address must be null, otherwise exception is thrown -->
+    <bean name="userBean1" class="com.playground.test2.models.User" depends-on="dependent">
+        <property name="name" value="UserName"/>
+        <property name="address.street" value="myStreet"/>
+    </bean>
+
+
+    
+
+
+
+
+
+</beans>

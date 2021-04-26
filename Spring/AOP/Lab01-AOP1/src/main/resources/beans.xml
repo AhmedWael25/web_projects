@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:c="http://www.springframework.org/schema/c"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="calc" class="com.playground.services.CalculatorServiceImpl"/>
+
+    <bean id="calcBefore" class="com.playground.aop.advices.CalcBeforeAdvice"/>
+    <bean id="calcAfter" class="com.playground.aop.advices.CalcAfterReturnAdvice"/>
+    <bean id="calcAround" class="com.playground.aop.advices.CalcAround"/>
+    <bean id="calcAfterThrow" class="com.playground.aop.advices.CalcAfterThrow"/>
+
+
+    <!-- Note : All advices will be applied to all methods iin the class -->
+    <!-- Unless specified otherwise (More granular definitions) -->
+    <!-- Do so with an advisor (which wraps advice[log] + pointcut[add,sub,...]) -->
+
+
+    <bean id="methodNamePointCut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+        <property name="mappedName" value="add"/>
+    </bean>
+    <bean id="methodNameAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="pointcut" ref="methodNamePointCut"/>
+        <property name="advice" ref="calcBefore"/>
+    </bean>
+    <bean id="calcProxy1" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- Automatically detyected by ProxyFactoryBean , so this can be removed -->
+        <property name="proxyInterfaces">
+            <list>
+                <value>com.playground.services.Calculator</value>
+            </list>
+        </property>
+        <!-- Takes only one target -->
+        <property name="target" ref="calc"/>
+        <!-- Advices Names -->
+        <property name="interceptorNames">
+            <list>
+                <value>methodNameAdvisor</value>
+            </list>
+            <!-- <list>
+                <value>calcBefore</value>
+                <value>calcAfter</value>
+                <value>calcAround</value>
+            </list> -->
+        </property>
+    </bean>
+
+
+    <bean id="regexAdvisor2" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="patterns">
+            <list>
+                <value>.*add.*</value>
+            </list>
+        </property>
+        <property name="advice" ref="calcBefore"></property>
+    </bean>
+    <bean id="methodNameAdvisor2" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="mappedNames">
+            <list>
+                <value>mul</value>
+                <value>sub</value>
+            </list>
+        </property>
+        <property name="advice" ref="calcBefore"/>
+    </bean>
+    <bean id="methodNameAdvisor3" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="mappedNames">
+            <list>
+                <value>mul</value>
+                <value>sub</value>
+            </list>
+        </property>
+        <property name="advice" ref="calcAfter"/>
+    </bean>
+    <bean id="methodNameAdvisor4" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="mappedNames">
+            <list>
+                <value>mul</value>
+                <value>sub</value>
+            </list>
+        </property>
+        <property name="advice" ref="calcAround"/>
+    </bean>
+
+    <bean id="methodNameAdvisor5" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="mappedNames">
+            <list>
+                <value>div</value>
+            </list>
+        </property>
+        <property name="advice" ref="calcAfterThrow"/>
+    </bean>
+
+    <bean id="calcProxy2" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- Automatically detyected by ProxyFactoryBean , so this can be removed -->
+        <property name="proxyInterfaces">
+            <list>
+                <value>com.playground.services.Calculator</value>
+            </list>
+        </property>
+        <!-- Takes only one target -->
+        <property name="target" ref="calc"/>
+        <!-- Advices Names -->
+        <property name="interceptorNames">
+            <list>
+                <value>methodNameAdvisor2</value>
+                <value>methodNameAdvisor3</value>
+                <value>methodNameAdvisor4</value>
+                <value>methodNameAdvisor5</value>
+                <value>regexAdvisor2</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--  Auto Proxy -->
+    <bean id="calcAutoProxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>calc</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>methodNameAdvisor2</value>
+                <value>methodNameAdvisor3</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

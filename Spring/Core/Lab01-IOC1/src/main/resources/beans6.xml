@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <!-- <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/> -->
+    <!-- ====== Annotations Testing ====== -->
+    <!-- <bean id="parent1" class="com.playground.test2.models.Parent" ></bean> -->
+    <!-- <bean id="productDao1" class="com.playground.test2.daos.productdao.ProductDaoImpl"></bean> -->
+    <!-- When @Required is used it didnot work unless we explicitly put the required anootaiton bean definition -->
+    <!-- Why is this? shouldn't annotation-config sufice? =========================-->
+    <!-- <bean id="accountService1" class="com.playground.test2.service2.AccountServiceImpl"/> -->
+
+    <!-- ===TESTING PROPERTIES FILES===== -->
+    <!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <value>prop1.properties</value>
+            <value>prop2.properties</value>
+        </property>
+    </bean> -->
+    <!-- <context:property-placeholder location="prop1.properties,prop2.properties"/> -->
+<!--     
+    <bean id="propsReader1" class="com.playground.test2.service2.PropertiesReaderService">
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="admin" value="${jdbc.admin}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean> -->
+
+
+    <bean id="propsReader2" class="com.playground.test2.service2.PropertiesReaderService"></bean>
+
+    <bean id="myChild" class="com.playground.test2.models.Child"></bean>
+
+
+
+
+</beans>

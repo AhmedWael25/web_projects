@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- this automatically uses annotaiton-conmfig internally -->
+    <!-- We can disable AutowiredAnnotationBeanPostProcessor  nd CommonAnnotationBeanPostProcessor  -->
+    <!-- by having annotation-config att. be false. -->
+<!--    <context:component-scan base-package="com.playground.test3" annotation-config="true" scope-resolver="com.playground.test3.CustomScope"/>-->
+    <!-- print =>
+    Generic bean: class [com.playground.test3.models.Parent]; scope=;
+    abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false;
+    factoryBeanName=null; factoryMethodName=null; initMethodName=null;
+    destroyMethodName=null; defined in class path resource [com/playground/test3/models/Parent.class]
+    -->
+    <!-- The use-default-filter = flase will disable automatic detection for all stereoptype Anno.-->
+    <context:component-scan base-package="com.playground.test4" scope-resolver="com.playground.test4.CustomScope">
+        <!-- Include Classes that doesnot have Named/any stertotype Anno. -->
+        <!-- Thus The TestRepo class will be included as well-->
+        <context:include-filter type="regex" expression=".*Repo"/>
+        <!-- The TestService class will be excluded, since we said we want to exclude classes annotated with @Service-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+
+
+</beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="default">
+<!--        <description>My Unit</description>-->
+
+<!--&lt;!&ndash;        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>&ndash;&gt;-->
+
+<!--        <jta-data-source>java:app/jdbc/jdbc/ormdb</jta-data-source>-->
+
+<!--&lt;!&ndash;        <class>com.example.domain.Users</class>&ndash;&gt;-->
+
+<!--        <properties>-->
+<!--&lt;!&ndash;            <property name ="javax.persistence.schema-generation.database.action" value="update"/>&ndash;&gt;-->
+<!--        </properties>-->
+
+
+    </persistence-unit>
+</persistence>

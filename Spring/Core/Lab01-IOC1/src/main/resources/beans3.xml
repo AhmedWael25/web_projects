@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- Autowire when false excluded the first bean , list's size was 2  -->
+    <bean id="userDao1" class="com.playground.test2.daos.userdao.UserDaoImpl" autowire-candidate="false"></bean>
+    <bean id="userDao2" class="com.playground.test2.daos.userdao.UserDaoImpl"></bean>
+    <bean id="userDao3" class="com.playground.test2.daos.userdao.UserDaoImpl"></bean>
+
+
+
+    <bean id="prodDao1" class="com.playground.test2.daos.productdao.ProductDaoImpl" primary="true"></bean>
+    <bean id="prodDao2" class="com.playground.test2.daos.productdao.ProductDaoImpl"  ></bean>
+    <bean id="prodDao3" class="com.playground.test2.daos.productdao.ProductDaoImpl"></bean>
+
+
+
+    <bean id="simpleService3" class="com.playground.test2.service2.Service3Impl" autowire="byType"/>
+
+
+    <bean id="simpleService4" class="com.playground.test2.service2.Service3Impl" autowire="constructor"/>
+    
+
+</beans>

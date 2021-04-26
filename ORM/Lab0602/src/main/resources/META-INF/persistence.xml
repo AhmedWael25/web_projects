@@ -7,22 +7,18 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+        <class>org.playground.domain.Users</class>
 
-    <class> org.playground.domain.Publisher</class>
-    <class> org.playground.domain.Book</class>
-    <class> org.playground.domain.Author</class>
 
-        <validation-mode>CALLBACK</validation-mode>
+<!--        <validation-mode>CALLBACK</validation-mode>-->
 
         <properties>
 
-            <property name ="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/webservicedb"/>
+            <property name ="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ormdb"/>
             <property name ="javax.persistence.jdbc.user" value="root"/>
             <property name ="javax.persistence.jdbc.password" value="admin"/>
             <property name ="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name ="javax.persistence.schema-generation.database.action" value="update"/>
-
+<!--            <property name ="javax.persistence.schema-generation.database.action" value="update"/>-->
         </properties>
-
     </persistence-unit>
 </persistence>

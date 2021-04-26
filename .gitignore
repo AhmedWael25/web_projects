@@ -7,6 +7,10 @@
 /*/*/target/*
 /*/*/.idea
 /*/*/*.iml
+/*/*/*/.iml
+/*/*/*/.idea
+/*/*/*/target
+/*/*/*/target/*
 #res
 
 #target
@@ -145,3 +149,6 @@ $RECYCLE.BIN/
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+/EJB/EnterpriseApplication1/nbproject/private/
+/EJB/EnterpriseApplication1/EnterpriseApplication1-war/nbproject/private/
+/EJB/EnterpriseApplication1/EnterpriseApplication1-ejb/nbproject/private/

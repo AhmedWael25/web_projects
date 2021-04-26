@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:c="http://www.springframework.org/schema/c"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd"
+    >
+
+    <!-- This is commented to prevent auto detection, we can use same classes that are annotated -->
+    <!-- <aop:aspectj-autoproxy/> -->
+
+
+
+    <bean id="calculatorImpl" class="com.playground.services.CalculatorServiceImpl"/>
+    
+    <bean id="before" class="com.playground.aop.aspects.CalcBefore"/>
+    <bean id="calcAspect" class="com.playground.aop.aspects.CalculatorAspect"/>
+
+    <aop:config>
+        <!-- <aop:aspect id="myAspect" ref="before">
+            <aop:pointcut id="addPointCut" expression="execution(* com.playground.services.Calculator.add(..))"/>
+            <aop:before method="before" pointcut-ref="addPointCut"/>
+        </aop:aspect> -->
+
+        <aop:aspect id="myCalcAspect" ref="calcAspect" >
+            <aop:pointcut id="addPointCut" expression="execution(* com.playground.services.Calculator.add(double,double))"/>
+            <aop:before method="before1" pointcut-ref="addPointCut"/>
+            <aop:after method="after" pointcut-ref="addPointCut"/>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>

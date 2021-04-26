@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- Bean Definition Inheritance  -->
+
+    <!-- Trial one, base case -->
+    <!-- The child inherited properties form the parent and overrider one property  -->
+    <!-- <bean id="parentDefinition1" class="com.playground.test2.models.Parent" abstract="true" >
+        <property name="name" value="myName"></property>
+        <property name="age" value="20"></property>
+    </bean>
+    <bean id="childDefinition1" class="com.playground.test2.models.Child" parent="parentDefinition1">
+        <property name="name" value="NameOverriden"></property>
+        <property name="address" value="addressFromChild"></property>
+    </bean> -->
+
+    <!-- Trial 2,  -->
+    <!--  Child has no class, child will inherit frpm parent, and conform to it's properties -->
+    <!--  for that the address property had to be deleted, or else error-->
+    <!--  adddress doesnot have invalid setter method exception-->
+    <!-- <bean id="parentDefinition1" class="com.playground.test2.models.Parent" abstract="true" >
+        <property name="name" value="myName"></property>
+        <property name="age" value="20"></property>
+    </bean>
+    <bean id="childDefinition1"  parent="parentDefinition1">
+        <property name="name" value="NameOverriden"></property> -->
+        <!-- <property name="address" value="addressFromChild"></property> -->
+    <!-- </bean> -->
+    
+    <!-- Trial 3 -->
+    <!-- Removing abstract attribute from the parent, diddnot throw an eerror and   -->
+    <!-- Child was able to inherit it's properties 3ady and was allowed to create objects form it-->
+    <!-- <bean id="parentDefinition1" class="com.playground.test2.models.Parent"  >
+        <property name="name" value="parentName"></property>
+        <property name="age" value="20"></property>
+    </bean>
+
+    <bean id="childDefinition1" class="com.playground.test2.models.Child" parent="parentDefinition1">
+        <property name="address" value="addressFromChild"></property>
+    </bean> -->
+
+    <!-- Trial 4 -->
+    <!-- put abstract if no class -->
+    <!-- If we have in parent proeprty that's no in the child it will give an error -->
+    <!-- aLL PROPERTIES SPECIFIED IN PARENT DEFINITON MUST Be in child -->
+    <!-- Comment errorProperty to not have an err -->
+    <!-- <bean id="parentDefinition1"  abstract="true">
+        <property name="name" value="parentName"></property>
+        <property name="age" value="20"></property> -->
+        <!-- <property name="errorProperty" value="err"></property> -->
+    <!-- </bean>
+
+    <bean id="childDefinition1" class="com.playground.test2.models.Child" parent="parentDefinition1">
+        <property name="name" value="childOverriden"></property>
+        <property name="address" value="addressFromChild"></property>
+    </bean> -->
+
+    <!-- Trial 5 -->
+    <!-- in List merged parent values are put first then child -->
+    <!--  -->
+    <bean id="parentDefinition1"  abstract="true">
+        <property name="name" value="parentName"></property>
+        <property name="age" value="20"></property>
+        <property name="myList">
+            <list>
+                <value>value1</value>
+                <value>value2</value>
+            </list>
+        </property>
+        <property name="mySet">
+            <set>
+                <value>valueSet1</value>
+                <value>valueSet2</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="childDefinition1" class="com.playground.test2.models.Child" parent="parentDefinition1">
+        <property name="name" value="childOverriden"></property>
+        <property name="address" value="addressFromChild"></property>
+        <property name="myList">
+            <list merge="true">
+                <value>value3</value>
+                <value>value4</value>
+            </list>
+        </property>
+        <property name="mySet">
+            <set merge="true">
+                <value>valueSet1</value>
+                <value>valueSet3</value>
+            </set>
+        </property>
+    </bean>
+
+    
+
+</beans>

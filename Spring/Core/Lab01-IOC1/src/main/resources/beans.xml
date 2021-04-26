@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+        <!-- =================INSTANTIATING USING CONSTRUCTOR======= -->
+        <!-- Using the empty Const -->
+        <bean id="simpleBean1" class="com.playground.test1.service1.Service1Impl"></bean>
+
+        <!-- Using String Const, "Depends On Byte Code order of constructors" -->
+        <!-- All trials Called the String constructor,when it was removed it called the -->
+        <!-- int constructor -->
+        <bean id="simpleBean2" class="com.playground.test1.service1.Service1Impl">
+            <constructor-arg value="20"/>
+        </bean>
+        <!-- Using type to call the int const. -->
+        <!-- Name is unique, if exist more than one will give "is already used in this <beans> element" -->
+        <bean id="simpleBean3" name="simpleBean3Name1" class="com.playground.test1.service1.Service1Impl">
+            <constructor-arg type="int" value="20"/>
+        </bean>
+        
+        <!-- These will call the 2 arg constructor, thr first called the int,String -->
+        <!-- It  called int.,string first "But ALSO the byte code " -->
+        <!-- is taken into consideration multiple times it did string,int first -->
+        <!-- In Second One when the first arg was changed to char values, it called string,int -->
+        <bean id="simpleBean4" name="simpleBean3Name2;simpleBean3Name3" class="com.playground.test1.service1.Service1Impl">
+            <constructor-arg value="20"/>
+            <constructor-arg value="45"/>
+        </bean>
+        <bean id="simpleBean5"  class="com.playground.test1.service1.Service1Impl">
+            <constructor-arg value="45"/>
+            <constructor-arg value="cc"/>
+        </bean>
+
+        <!--  Short Const.-->
+        <bean id="simpleBean6"  class="com.playground.test1.service1.Service1Impl">
+            <constructor-arg type="short" value="1"/>
+        </bean>
+
+        <!-- ORDER OF CONSTRUCTOR ARGUMENTS MATTER? -->
+        <!-- This "called int,short" but when removed it CORRECTLY called short,int -->
+        <!-- Most probably it does an automatic type cast with the first   -->
+        <!-- Constructor elligable for calling -->
+        <bean id="simpleBean7"  class="com.playground.test1.service1.Service1Impl">
+            <constructor-arg type="short" value="2"/>
+            <constructor-arg type="int" value="1"/>
+        </bean>
+        <!-- Expected Providing name to fix this ambiguity Problem, but id didnot -->
+        <!-- Still int, short => "according to byte code order" -->
+        <bean id="simpleBean8"  class="com.playground.test1.service1.Service1Impl">
+            <constructor-arg name="shortInt"   value="2"/>
+            <constructor-arg name="age"  value="1"/>
+        </bean>
+        <!-- Does -->
+        <bean id="simpleBean9"  class="com.playground.test1.service1.Service1Impl">
+            <constructor-arg index="0" type="short"  value="2"/>
+            <constructor-arg index="1" type="int"  value="1"/>
+        </bean>
+
+
+        <!-- INSTANTIATING USING Static Factory METHOD -->
+         <bean id="simpleBean10" class="com.playground.test1.service1.Service1Impl" factory-method="createServiceImpl"></bean>
+
+        <bean id="simpleBean11" class="com.playground.test1.service1.Service1Impl" factory-method="createServiceImpl">
+            <constructor-arg value="1"/>
+            <constructor-arg value="4"/>
+        </bean> 
+
+
+        <!-- INSTANTIATING USING INSTANCE FACTORY METHOD -->
+        <!-- Create the service Factory/locator bean -->
+        <!--  -->
+        <bean id="serviceFactory" class="com.playground.test1.ServiceFactory" />
+        <!-- determine the bean in container that has the instance method that will -->
+        <!-- be invoked as well as the method name -->
+        <bean id="simpleBean13" factory-bean="serviceFactory" factory-method="createService1Instance" />
+
+
+
+</beans>

@@ -1,7 +1,8 @@
 package org.playground;
 
 
-import org.playground.domain.Author;
+
+import org.playground.domain.Users;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,19 +17,24 @@ public class App
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("webservice_JPA");
         EntityManager em = emf.createEntityManager();
 
-        Author author = new Author("Name", new Date());
-        author.setAge(25);
-//        author.setAge(150);
 
+        Users u = new Users();
 
         em.getTransaction().begin();
 
-        em.persist(author);
+        u.setFirstName("fname");
+        u.setSecondName("lname");
+        u.setJob("JON");
+        u.setDob(new Date());
+        em.persist(u);
+//        u = em.find(Users.class, 1);
+
 
         em.getTransaction().commit();
 
+        System.out.println(u);
+
         em.close();
-        emf.close();
 
     }
 

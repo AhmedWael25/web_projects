@@ -7,6 +7,7 @@
         <description>My Unit for WebService Examples</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+
         <!-- JTA and NON-JTA are mostly used in jakarta EE env.
         To enable referencing of JNDI Names of datasources -->
         <non-jta-data-source>java:/comp/env/jdbc/webservicedb</non-jta-data-source>

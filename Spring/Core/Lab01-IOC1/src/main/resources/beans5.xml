@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <!-- ======Injecting application context====== -->
+    <!-- TRIAL 1 -->
+    <!-- Define bean to test with -->
+    <bean id="parent1" class="com.playground.test2.models.Parent"></bean>
+    <!-- Using @Resource and @Autowired -->
+    <bean id="contextProviderBean1" class="com.playground.test2.models.ContextProvider"/>
+    <!-- Using auto-wire attribute in bean definition byType and constr(which chooses the greediest one) -->
+    <bean id="contextProviderBean2" class="com.playground.test2.models.ContextProvider" autowire="byType"/>
+    <!-- Despite the constructor not setting, it's still mazbuta b not null!! ASK?! -->
+    <!-- However the Parent member had to be set in the constructor to not give null, why? -->
+    <!--  -->
+    <!--  -->
+    <bean id="contextProviderBean3" class="com.playground.test2.models.ContextProvider" autowire="constructor"/>
+
+</beans>
