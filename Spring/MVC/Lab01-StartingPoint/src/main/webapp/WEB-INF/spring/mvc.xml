@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:c="http://www.springframework.org/schema/c"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd"
+    >
+    <!-- This File Should be Used to define Contollers, View resolvers, and handlerMappings -->
+
+    <!-- ==== CONTROLLERS ==== -->
+    <!-- Define the hello world controller bean -->
+    <!-- Abstract Controllers -->
+    <bean id="helloController" class="com.playground.controllers.HelloWorldController"/>
+    <bean id="/helloBean.htm" class="com.playground.controllers.HelloWorldController"/>
+    <bean id="/mypdf.htm" class="com.playground.controllers.MyPDFController"/>
+    <bean id="/myform.htm" class="com.playground.controllers.FormController"/>
+
+    <!-- ParameterizableViewController (For static browsing) -->
+    <!-- Decreases overhead of defining a controller that just returns a logical view name -->
+    <!-- This controller returns pre-configured view, and optionally set response status code -->
+    <!-- Needs mapping OFC. -->
+    <bean id="staticParameterizable" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="contact"
+        p:statusCode="ACCEPTED"
+    />
+
+    <!-- AbstractUrlViewController -->
+    <!-- Extends Abstract Controller to make use of the handleRequestInternal() Method -->
+    <!-- Return view name based on the Reqeust -->
+    <!--  Also one of preferrable ways return static resources with JUST returning the view Name -->
+    <bean id="/hello2.htm" class="com.playground.controllers.HelloAbstractUrlViewController"/>
+
+    <!-- UrlFilenameViewController -->
+    <!-- Trnasform virtual path of URL into view name -->
+    <!-- We can optionaly provide prefix ans suffix to build a viewName -->
+    <!-- Needs mapping OFC. -->
+    <bean id="contactUrlFilename" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"
+        p:prefix="/admin/"
+        p:suffix=""
+    />
+
+    <!-- ServletForwardingController -->
+    <!-- This Controller forwards to another servlet to process request (That will do the business Logic) -->
+    <!-- The servlet is configured in the web.xml -->
+    <!-- Very powerful a servlet doesnot need a URL pattern to be matched  -->
+    <!-- but will use it's servlet Name -->
+    <!-- No need to define the sevlet to be instantiated becasue it's managed by the servlet container -->
+    <!-- So will be automatically instantiated upon first request -->
+    <!-- <bean id="profileController" class="com.playground.controllers.ProfileController" lazy-init="true"/> -->
+    <bean id="profileServletForwarding" class="org.springframework.web.servlet.mvc.ServletForwardingController">
+        <property name="servletName">
+            <value>ProfileController</value>
+        </property>
+    </bean>
+
+
+    <!-- ServletWrappingController -->
+    <!-- Unlike the  ServletForwardingController the servlet will be wrapped inside the controller -->
+    <!--  -->
+    <!--  -->
+    <bean id="profileServletWrapping" class="org.springframework.web.servlet.mvc.ServletWrappingController">
+        <property name="servletClass">
+            <value>com.playground.controllers.ProfileController</value>
+        </property>
+        <property name="servletName">
+            <value>ProfileController2</value>
+        </property>
+        <!-- <property name="initParameters">
+            <props>
+                <prop key="myString"> lolol </prop>
+            </props>
+        </property> -->
+    </bean>
+
+    <!-- Trying different Handler Mappings -->
+    <!-- SimpleUrlHandlerMapping -->
+    <!-- Contorller is mapped to URLs using property collection -->
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="order" value="1"/>
+        <property name="mappings">
+            <props>
+                <prop key="/simple.htm">helloController</prop>
+                <prop key="/contact.htm">staticParameterizable</prop>
+                <prop key="/admin.htm">contactUrlFilename</prop>
+                <prop key="/profile.htm">profileServletForwarding</prop>
+                <prop key="/profile2.htm">profileServletWrapping</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- AbstractDetectingUrl -->
+    <!-- It defines mapping bwetween URL Pattern or more with the Controller Id -->
+    <!--  -->
+    <bean id="abstractDetecting" class="com.playground.handlermappings.MyAbstractDetectingUrlHandlerMapping"></bean>
+
+    <!-- BeanNameUrl -->
+    <!-- This is is from the default in the .properties File  -->
+    <!-- Removing This will Not Work because there are other handle mappings defined above -->
+    <!-- For it to work when removed, The above defined mappings will have to be removed -->
+    <!-- Then Spring will fall back to defaults (it included)  -->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+
+    <!-- =============================================== -->
+    <!-- ================= RESOLVERS =================== -->
+
+    <!-- InternalResourceViewResolver  -->
+    <!-- Takes the logical view name from ModelAndView Obj., append and prepend it with prefix and suffix -->
+    <!-- to arrive at the appropriate  path of a view  -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix">
+            <value>/WEB-INF/pages/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+        <property name="order" value=" 10"/>
+    </bean>
+    <!-- 
+        ============================
+        T.C That removing the order properties vaused a 404, becaue
+        the InternalResource resoved the logical name first so it looke for
+        (/web-inf/pages/customPDFView.jsp)
+        that's why it's important to let it be the last thing
+        because it will always resolve doesnt amtter if it found the page or no
+        ===========================
+     -->
+    <!-- XmlViewResolver -->
+    <bean id="xmlResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+          <property name="location">
+              <value>/WEB-INF/spring/views.xml</value>
+          </property>
+          <property name="order" value="1"/>
+    </bean>
+
+    <!-- ======================================= -->
+
+    <!-- View Externalizing -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
+
+</beans>

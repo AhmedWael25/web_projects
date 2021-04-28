@@ -70,8 +70,8 @@
                 <version>2.2</version>
                 <configuration>
                     <server>tomcat</server>
-                    <url>http://localhost:9191/manager/text</url>
-                    <path>/auth</path>
+                    <url>http://localhost:8080/manager/text</url>
+                    <path>/Spring-MVC</path>
                 </configuration>
             </plugin>
         </plugins>
