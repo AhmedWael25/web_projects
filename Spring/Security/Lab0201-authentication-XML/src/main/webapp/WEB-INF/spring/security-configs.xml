@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:c="http://www.springframework.org/schema/c"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xmlns:security="http://www.springframework.org/schema/security"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/security
+    https://www.springframework.org/schema/security/spring-security.xsd"
+    >
+
+    <!-- Auth. COnfigs -->
+    <security:authentication-manager>
+        <security:authentication-provider>
+
+        <!-- Def. is in Memmory Use -->
+        <security:user-service>
+            <security:user name="user" password="$2a$04$HF39tEgDxyOOEdR06C20nutrBce.JzxzGEsXYeK2ajuo3Vh6VvCee" authorities="ROLE_USER"/>
+            <security:user name="admin" password="$2a$04$HF39tEgDxyOOEdR06C20nutrBce.JzxzGEsXYeK2ajuo3Vh6VvCee" authorities="ROLE_ADMIN"/>
+        </security:user-service>
+
+            <security:password-encoder hash="bcrypt"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+
+    <!-- Authroization Configs -->
+    <!-- when auto config = true , spring will create default login/logout URLs -->
+    <security:http auto-config="true">
+        <security:access-denied-handler error-page="/error"/>
+
+        <!-- Remember : Order is important, first match will be chosen -->
+        <security:intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/user/*" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/*" access="permitAll()"/>
+
+        <security:session-management>
+            <security:concurrency-control max-sessions="1"/>
+        </security:session-management>
+
+    </security:http>
+
+</beans>

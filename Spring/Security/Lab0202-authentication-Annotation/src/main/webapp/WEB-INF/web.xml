@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" 
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" metadata-complete="false">
+
+
+    <!-- Declaring the ContextLoaderListener which is responsabile for init. the root app context and it's beans -->
+    <!-- It;s hooked to the servlet container lifecycle, i.e it listens to the startup and shutdown of it -->
+    <!-- It does so by implementing ServletContextListener, and acoording to the container state -->
+    <!-- it create or destroy Spring-managed beans -->
+<!--     <listener>-->
+<!--        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+<!--    </listener>-->
+
+<!--    <context-param>-->
+<!--        <param-name>contextConfigLocation</param-name>-->
+        <!-- When Havine Both app,root contexts, Security Configs,should in root/first thing -->
+        <!-- If it's put with the web app while root ctxt exists = exception -->
+        <!-- Security configs is vital to be first to load -->
+<!--        <param-value>/WEB-INF/spring/applicationContext.xml,/WEB-INF/spring/security-configs.xml</param-value>-->
+<!--    </context-param>-->
+
+
+    <!-- Dispatcher Servlet Declaration -->
+<!--    <servlet>-->
+<!--        <servlet-name>mvc-dispatcher</servlet-name>-->
+<!--        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+<!--        <init-param>-->
+<!--            <param-name>contextConfigLocation</param-name>-->
+<!--            <param-value>/WEB-INF/spring/mvc.xml</param-value>-->
+<!--        </init-param>-->
+<!--        <load-on-startup>1</load-on-startup>-->
+<!--    </servlet>-->
+    <!-- Mapping the Dispatcher Servlet -->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>mvc-dispatcher</servlet-name>-->
+<!--        <url-pattern>/</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+
+    <!-- Spring Security  Delegating Filter Proxy -->
+<!--    <filter>-->
+<!--        <filter-name>springSecurityFilterChain</filter-name>-->
+<!--        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+<!--    </filter>-->
+
+<!--    <filter-mapping>-->
+<!--        <filter-name>springSecurityFilterChain</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--    </filter-mapping>-->
+<!-- -->
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error</location>
+    </error-page>
+</web-app>
